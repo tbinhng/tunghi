@@ -58,30 +58,34 @@ class Login extends React.Component {
       return <Loading />
     }
 
-    return <main>
-      <h1>sign-in</h1>
-      <form className="account" onSubmit={(e) => this.handleLogin(e)}>
-        <label>
-          Usernames
-                    <input type="text"
-            value={this.state.username}
-            onChange={this.handleChange('username')}
-            required="required" />
-        </label>
+    return(
+      <main className="auth-main">
+        <div className="auth-block">
+          <h1>Sign in to Blur Admin</h1>
+          <form className="form-horizontal">
+            <div className="form-group">
+              <label for="inputEmail3" className="col-sm-2 control-label">Email</label>
 
-        <label>
-          Password
-                    <input type="password"
-            value={this.state.password}
-            onChange={this.handleChange('password')}
-            required="required" />
-        </label>
+              <div className="col-sm-10">
+                <input type="email" className="form-control" id="inputEmail3" placeholder="Email" />
+              </div>
+            </div>
+            <div className="form-group">
+              <label for="inputPassword3" className="col-sm-2 control-label">Password</label>
 
-        {error && <Error text={error} />}
-
-        <button onClick={(e) => this.handleLogin(e)}>Login</button>
-      </form>
-    </main>
+              <div className="col-sm-10">
+                <input type="password" className="form-control" id="inputPassword3" placeholder="Password" />
+              </div>
+            </div>
+            <div className="form-group">
+              <div className="col-sm-offset-2 col-sm-10">
+                <button type="submit" className="btn btn-default btn-auth">Sign in</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </main>
+    );
   }
 }
 
