@@ -7,10 +7,10 @@ require('./core/helpers/polyfills')
 
 // Compile files on PROD or launch DEV server
 if (process.env.NODE_ENV === 'production') {
-    require('./core/webpack/webpack.prod.js')
+  require('./core/webpack/webpack.prod.js')
 } else {
-    process.env.DEV = true
-    require('./core/webpack/webpack.dev.js')
+  process.env.DEV = true
+  require('./core/webpack/webpack.dev.js')
 }
 
 require('babel-register')

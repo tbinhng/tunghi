@@ -7,19 +7,19 @@ import NotFound from './NotFound'
 import Menu from '../components/common/Menu'
 
 class App extends React.Component {
-    render() {
-        const { stores } = this.props
+  render() {
+    const { stores } = this.props
 
-        // Wrapping with provider gives children access to stores
-        return (<Provider {...stores}>
-            <div>
-                <Match exactly pattern="/" component={Home}/>
-                {/* User management */}
-                <Match exactly pattern="/login" component={Login}/>
-                <Miss component={NotFound}/>
-            </div>
-        </Provider>)
-    }
+    // Wrapping with provider gives children access to stores
+    return (<Provider {...stores}>
+      <div>
+        <Match exactly pattern="/" component={Home} />
+        {/* User management */}
+        <Match exactly pattern="/login" component={Login} />
+        <Miss component={NotFound} />
+      </div>
+    </Provider>)
+  }
 }
 
 export default App
