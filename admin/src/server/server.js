@@ -11,6 +11,7 @@ import context from './middleware/context'
 import catcher from './middleware/catcher'
 import render from './middleware/render'
 import account from './routes/account'
+import graphql from './routes/graphql'
 
 const app = new Koa()
 
@@ -27,6 +28,7 @@ app.use(context)
 app.use(catcher)
 
 // Routes
+app.use(graphql.routes())
 app.use(account.routes())
 
 // Serve static files
