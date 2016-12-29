@@ -1,7 +1,6 @@
 # APP
 node_modules
 build/
-data/
 uploads/
 stats.json
 
