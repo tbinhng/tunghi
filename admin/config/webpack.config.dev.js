@@ -79,6 +79,9 @@ module.exports = {
       'react-native': 'react-native-web'
     }
   },
+  sassLoader: {
+    includePaths: paths.appSrc
+  },
   
   module: {
     // First, run the linter.
