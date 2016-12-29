@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
+import './index.scss';
 
 class Login extends Component {
   render() {
-    return <h1>Login</h1>
+    return <h1 className="login">Login</h1>
   }
 }
 
