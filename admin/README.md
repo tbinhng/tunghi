@@ -1,179 +1,177 @@
-# React + Mobx Quick Starter project
+<h1 align="center">
+  <br>
+	<img width="800" src="https://cloud.githubusercontent.com/assets/4281887/14516854/792107ac-0231-11e6-95dd-86bb2b5197e3.png">
+	<br>
+  <br>
+  <br>
+</h1>
 
-The goal of this project is to provide a starting base for an isomorphic (universal) mobx react project.
+[![Dependency Status](https://img.shields.io/david/lvarayut/relay-fullstack.svg)](https://github.com/lvarayut/relay-fullstack)
+[![devDependency Status](https://img.shields.io/david/dev/lvarayut/relay-fullstack.svg)](https://github.com/lvarayut/relay-fullstack)
+> Relay Fullstack is a Relay scaffolding application that aims to help you get up and running a project without worrying about integrating tools. It comes with many modern technologies; Relay, GraphQL, Express, ES6/ES7, JSX, Webpack, Babel, Material Design Lite, and PostCSS. Relay Fullstack is also using [Hot-reload](https://github.com/gaearon/react-transform-hmr) to real time update the screen whenever any code changes.
 
-Features:
-+ `async/await` support
-+ Isomorphic
-+ CSS and SCSS compilation
-+ MongoDB user register/login/logout
-+ Token based authentication
-+ Decorators for accessing actions and state
-+ Hot reload
-+ Automatic restarts _(when server code changes)_
+## Example
+![Demo](https://cloud.githubusercontent.com/assets/4281887/13377800/9c4705a2-de1d-11e5-82cb-745e16d5b1c4.gif)
+> Check out the [Live demo](http://relay-fullstack.herokuapp.com) on Heroku.
 
+## Usage
 
-![Preview](https://raw.githubusercontent.com/nightwolfz/mobx-starter/master/preview.png)
+### Basic
 
+The basic installation contains only general technologies needed by most of the projects, Relay Fullstack is totally unopinionated. If you wanted to include a database, flow, or any specific technologies, please see the [Advance](#advance) section.
 
-## How to run
-
-For development:
-
-    npm run dev
-
-For production:
-
-    npm run prod
-
-## Requirements
-
-    Node 6+ or Node 4 with additional babel plugins
-    MongoDB server
-
-## Goals
-
-- Optimized for minimal bundle size.
-- Optimized for server-side speed.
-- Using MobX, the easiest and insanely fast state manager.
-- Simple and minimal with routing, authentication, database and server-side rendering.
-- Good developer experience with hot-reloading and source-maps.
-
-
-# Benchmarks
-
-```sh
-gb -G=4 -k=true -c 200 -n 10000 http://localhost:2000/about
-
-Document Path:          /page/about
-Document Length:        1374 bytes
-
-Concurrency Level:      200
-Time taken for tests:   26.03 seconds
-Complete requests:      10000
-Failed requests:        0
-HTML transferred:       13740000 bytes
-Requests per second:    384.16 [#/sec] (mean)
-Time per request:       520.620 [ms] (mean)
-Time per request:       2.603 [ms] (mean, across all concurrent requests)
-HTML Transfer rate:     515.42 [Kbytes/sec] received
-
-Connection Times (ms)
-              min       mean[+/-sd]     median  max
-Total:        66        2   52.84       503     783
+Clone the repository to your local directory
+```bash
+$ git clone https://github.com/lvarayut/relay-fullstack.git
+$ cd relay-fullstack
 ```
-Tested on i7-6700K @ 4.00GHz 16GB RAM. **Single** node.js instance.
 
-# F.A.Q.
+Install all dependencies & Start developing
+```bash
+$ npm install
+$ npm start
+```
 
-## What are `stores` ?
+Launch your favorite web browser and go to `http://localhost:3000` for Relay application or `http://localhost:8000` for GraphiQL.
 
-Stores will contain the state of your application and the methods that mutate that state.
-Basically most of your client side logic is inside stores.
+### Advance
 
+Relay Fullstack is integrated with Yeoman that allows you to choose technologies that suit your needs, the options are including database, flow, and etc.
 
-## What is `@inject()` and `@observer` ?
+Install `yo` and [generator-relay-fullstack](https://www.npmjs.com/package/generator-relay-fullstack) globally
 
-The `@inject` decorator injects stores into your components.
-Additionally by adding `@observer` your components will efficiently auto update with any changes to your stores.
+```bash
+$ npm install -g yo generator-relay-fullstack
+```
 
-_Example: If you display a `messageCount` from a `Messages` store and it gets updated,
-then all the visible components that display that `messageCount` will update themselves._
+Create a new directory and start the generator, it will prompt some questions to help you get up and running
 
+```bash
+$ mkdir relay-fullstack && cd $_
+$ yo relay-fullstack
+$ npm start
+```
 
-## Does observing many components make my app slower?
+Launch your favorite web browser and go to `http://localhost:3000` for Relay application or `http://localhost:8000` for GraphiQL.
 
-**No**, it actually allows the rendering to be done more efficiently. So observe as many as you want !
+> NOTE: generator-relay-fullstack is currently working with minimal functionalities. Database, Flow, and Sub-generator are work-in-progress.
 
+## Deployment
 
-## Adding database (mongodb) models
+#### Local machine
+In order to deploy a project, it is a good practice to minify all JavaScript files, stop spawning the GraphiQL server, pull off some duplicate dependencies, and remove all unnecessary scripts, for example, Hot-reload. All of these can be done by executing the following command:
 
-1. Goto `src/server/models`
-2. Add `[Name].js` with your model in it
+```bash
+$ npm run deploy
+```
 
-## Adding stores
+Again, launch your favorite web browser and go to `http://localhost:3000`.
 
-1. Goto `src/client/stores`
-2. Add `[name].js` (based on another store like `account.js`)
-3. Update `src/client/stores.js`
+#### Heroku
+Before getting started, make sure you already installed the [Heroku Toolbelt](https://toolbelt.heroku.com), which is a command-line tooling for managing Heroku applications that makes it easy to deploy an application in a few steps:
 
-## Enabling server-side rendering
-
-1. Goto `src/server/config`
-2. Set `server.SSR` variable to `true` or `false`
-
-## My components are not updating!
-
-Make sure you added the `@observer` decorator to your component.
-
-## My stateless component doesn't have access to the stores !
-
-You cannot use decorators on stateless components.
-You should instead wrap your component like this:
-
-```js
-const MyComponent = inject('myStore')(observer((props, context) => {
-  return <p>{props.myStore.something} !</p>
-}))
+```bash
+$ heroku create NAME_OF_YOUR_APP    # Create a new Heroku application
+$ git push heroku master            # Push your code into the created Heroku repository
+$ heroku ps:scale web=1             # Run the deployed application
 ````
 
-## How do I execute async actions on the server and/or client ?
+That is it! Now, open the application on your default browser using `heroku open`.
 
-Add a static `onEnter` method to your component like this:
+## Schema
 
-```js
-class MyComponent extends React.Component {
-    static onEnter({ myStore, params }) {
-        // Make sure to ALWAYS returns something (preferably a promise), even if its nothing!
-        // Otherwise we won't know when the method finished it's work
-        return myStore.browse()
-    }
-    // ...
-}
+Whenever you start a server, it will automatically execute `updateSchema.js` script in order to compile the schema definitions, defined in `schema.js`, to `schema.json` and `schema.graphql`. This is required by Relay framework. However, you could also run the script manually:
+
+```bash
+$ npm run update
 ```
 
-The `onEnter` method is smart, it will be executed either on the server or on the browser depending on how you access the website.
-
-It also passes all your stores and url params as arguments as a convenience.
-
-## How it works (server)
-
-1. `index.js` initializes the logger, generates a webpack bundle and runs the server
-
-2. The server runs a bunch of middleware:
-
-    1. `context.js` creates your initial state based on your stores defined in `src/client/stores.js`
-    2. `catcher.js` catches and handles any errors that might occur in your routes.
-    3. `authorize.js` checks if you are logged in and have access to protected routes.
-    4. `render.js` finally renders your components.
-    
-3. `server.js` also imports the routes from `server/routes` where each route can use a database model defined in `server/models`.
-Just adding a model file there is enough, we initialize the models lazily when they are used.
-
-## How it works (prefetching data on the server)
-
-Our `client/preload.js` will execute static methods on components when a certain url pattern is matched.
-The supported URL patterns are same as react-routers, you have have variables routes and wildcard matches.
-Ex: `/profile/:username/overview`
-
-## How it works (client)
-
-1. `client.js` initializes the stores, hot-reloading and other helpers. 
-2. It hydrates the state we got from the server and renders `pages/App.js`
-3. `pages/App.js` is basically your entry point. What you do afterwards is up to you!
-
-## TODO
-
-* Initialize the routes automatically just like the models
-* Sync with changes from `inferno-starter` which is usually more up to date
-
-## Useful links
-
-[MobX](https://mobxjs.github.io/mobx/)
+## Project Structure
 
 
-## Author
+    ├── client                          - All of the client side code resides in this folder
+    │   ├── assets                      - Images and fonts
+    │   ├── components                  - Relay containers, React components, and SCSS files used in the components
+    │   │   └── variables.scss          - Common SCSS variables
+    │   ├── routes                      - React-router-relay
+    │   │   ├── Route.js                - All route definitions
+    │   │   └── ViewerQuery.js          - Entry node of a GraphQL query
+    │   ├── index.html                  - HTML template file used by html-webpack-plugin
+    │   └── index.js                    - Client entry point
+    ├── server                          - All of the server side code resides in this folder
+    │   ├── config                      - Configuration
+    │   │   └── environment             - Separate configuration for each environment
+    │   │       ├── development.js      - Development configuration
+    │   │       ├── index.js            - Common configuration used in any environment
+    │   │       ├── production.js       - Production configuration
+    │   │       └── test.js             - Test configuration
+    │   ├── data                        - Data and APIs
+    │   │   ├── database.js             - Mock up database which should be replaced with your real database logic
+    │   │   ├── schema.graphql          - Compiled schema in a readable form
+    │   │   ├── schema.js               - Schema definitions
+    │   │   └── schema.json             - Compiled schema to be used by Relay
+    │   ├── utils                       - Utilities
+    │   │   ├── babelRelayPlugin.js     - Babel-relay-plugin provided by Relay
+    │   │   └── updateSchema.js         - Code for compiling the defined schema to schema.json and schema.graphql
+    │   └── index.js                    - Server entry point
+    ├── package.json                    - List of dependencies
+    ├── webpack.config.js               - Webpack configuration
 
-Ryan Megidov
+## Technologies
 
-https://github.com/nightwolfz/mobx-starter
+### Frameworks
+[Relay](https://facebook.github.io/relay) - A JavaScript framework for building data-driven react applications. It is required to be used with React and GraphQL.
+
+[React](https://facebook.github.io/react) - A JavaScript library for building user interfaces. It introduces many great concepts, such as, Virtual DOM, Data flow, etc.
+
+[GraphQL](https://github.com/facebook/graphql) - GraphQL is a query language and execution engine tied to any backend service.
+
+[Express](http://expressjs.com/) - Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
+
+### Module bundler & Syntax transformers
+[Webpack](https://webpack.github.io) - Webpack is a module bundler that takes modules with dependencies and generates static assets representing those modules.
+
+[Babel](https://babeljs.io) - Babel is a JavaScript compiler which allows you to  use next generation, ES6/ES7, JavaScript, today.
+
+### Languages
+[ES6/ES7](https://github.com/lukehoban/es6features) - ECMAScript 6, also known as ECMAScript 2015, is the latest version of the ECMAScript standard. ES6 is a significant update to the language.
+
+[JSX]( https://facebook.github.io/react/docs/jsx-in-depth.html) - JSX is a JavaScript syntax extension that looks similar to XML. You can use a simple JSX syntactic transform with React.
+
+### Designs
+[Material Design Lite](http://getmdl.io) - Material Design Lite lets you add a Material Design look and feel to your websites.
+
+[PostCSS](http://postcss.org) - PostCSS is a tool for transforming CSS with JavaScript. It has roughly 200 plugins to help you write CSS easier.
+
+### Additional Tools
+[React transform HMR](https://github.com/gaearon/react-transform-hmr) - A React Transform that enables hot reloading React classes.
+
+[React router relay](https://github.com/relay-tools/react-router-relay) - Relay integration for React Router.
+
+[Eslint](http://eslint.org) - The pluggable linting utility for JavaScript and JSX.
+
+[Autoprefixer](https://github.com/postcss/autoprefixer) - Parse CSS and add vendor prefixes to rules.
+
+[Precss](https://github.com/jonathantneal/precss) - Use Sass-like markup in your CSS.
+
+[Nodemon](http://nodemon.io) - Monitor for any changes in your node.js application and automatically restart the server.
+
+[CSS Modules](https://github.com/css-modules/css-modules) - CSS file in which all class names and animation names are scoped locally by default.
+
+## Credits
+- Relay Fullstack is inspired by [relay-starter-kit](https://github.com/relayjs/relay-starter-kit). Please take a look at the original code to learn more.
+- Handcrafted with ♥ by Varayut Lerdkanlayanawat.
+
+## Contributors
+
+[<img alt="lvarayut" src="https://avatars.githubusercontent.com/u/4281887?v=3&s=117" width="117">](https://github.com/lvarayut) |[<img alt="ianaya89" src="https://avatars.githubusercontent.com/u/3258966?v=3&s=117" width="117">](https://github.com/ianaya89) |[<img alt="kkostov" src="https://avatars.githubusercontent.com/u/4718042?v=3&s=117" width="117">](https://github.com/kkostov) |[<img alt="jtfell" src="https://avatars.githubusercontent.com/u/6702746?v=3&s=117" width="117">](https://github.com/jtfell) |[<img alt="kennydee" src="https://avatars.githubusercontent.com/u/1484406?v=3&s=117" width="117">](https://github.com/kennydee) |[<img alt="arnif" src="https://avatars.githubusercontent.com/u/1312916?v=3&s=117" width="117">](https://github.com/arnif) |
+:---: |:---: |:---: |:---: |:---: |:---: |
+[lvarayut](https://github.com/lvarayut) |[ianaya89](https://github.com/ianaya89) |[kkostov](https://github.com/kkostov) |[jtfell](https://github.com/jtfell) |[kennydee](https://github.com/kennydee) |[arnif](https://github.com/arnif) |
+
+[<img alt="lexun" src="https://avatars.githubusercontent.com/u/1910143?v=3&s=117" width="117">](https://github.com/lexun) |[<img alt="narongdejsrn" src="https://avatars.githubusercontent.com/u/1563323?v=3&s=117" width="117">](https://github.com/narongdejsrn) |[<img alt="ncrmro" src="https://avatars.githubusercontent.com/u/8276365?v=3&s=117" width="117">](https://github.com/ncrmro) |[<img alt="sankalpk" src="https://avatars.githubusercontent.com/u/1317291?v=3&s=117" width="117">](https://github.com/sankalpk) |[<img alt="jg123" src="https://avatars.githubusercontent.com/u/693277?v=3&s=117" width="117">](https://github.com/jg123) |
+:---: |:---: |:---: |:---: |:---: |
+[lexun](https://github.com/lexun) |[narongdejsrn](https://github.com/narongdejsrn) |[ncrmro](https://github.com/ncrmro) |[sankalpk](https://github.com/sankalpk) |[jg123](https://github.com/jg123) |
+
+## License
+
+MIT © [Varayut Lerdkanlayanawat](https://github.com/lvarayut)
