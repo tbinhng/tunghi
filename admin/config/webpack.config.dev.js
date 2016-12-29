@@ -82,7 +82,7 @@ module.exports = {
   sassLoader: {
     includePaths: paths.appSrc
   },
-  
+
   module: {
     // First, run the linter.
     // It's important to do this before Babel processes the JS.
@@ -114,7 +114,8 @@ module.exports = {
           /\.(js|jsx)$/,
           /\.css$/,
           /\.json$/,
-          /\.svg$/
+          /\.svg$/,
+          /\.scss$/
         ],
         loader: 'url',
         query: {
@@ -128,7 +129,7 @@ module.exports = {
         include: paths.appSrc,
         loader: 'babel',
         query: {
-          
+
           // This is a feature of `babel-loader` for webpack (not Babel itself).
           // It enables caching results in ./node_modules/.cache/babel-loader/
           // directory for faster rebuilds.
@@ -157,14 +158,15 @@ module.exports = {
         query: {
           name: 'static/media/[name].[hash:8].[ext]'
         }
-      }, 
+      },
       {
         test: /\.scss$/,
-        loaders: ["style", "css?sourceMap&-minimize", 'postcss', "sass?sourceMap"]
+        include: paths.appSrc,
+        loaders: ["style", "css", "sass"]
       }
     ]
   },
-  
+
   // We use PostCSS for autoprefixing only.
   postcss: function() {
     return [
