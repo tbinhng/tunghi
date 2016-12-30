@@ -1,8 +1,19 @@
 import React, { Component } from 'react'
 import {Modal, Button, Col, FormGroup, Form} from 'react-bootstrap';
+import {browserHistory} from 'react-router';
 import './index.scss';
 
 class Login extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: '',
+      password: ''
+    };
+    this.submit = this.submit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
 
   handleChange(event, type) {
     let value = event.target.value;
@@ -20,6 +31,7 @@ class Login extends Component {
   submit() {
     console.log(this.state.username);
     console.log(this.state.password);
+    browserHistory.push('/admin');
   }
 
   render() {
