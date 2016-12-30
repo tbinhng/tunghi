@@ -55,27 +55,27 @@ class Login extends Component {
         </div>
         <aside className="sidebar">
           <ul>
-            <li>
+            <li className="active">
               <Link to={``}>
-                <Icon name="home" />
+                <Icon name="home" size="3x" />
                 <span>Dashboard</span>
               </Link>
             </li>
             <li>
               <Link to={``}>
-                <Icon name="home" />
+                <Icon name="home" size="3x" />
                 <span>Dashboard</span>
               </Link>
             </li>
             <li>
               <Link to={``}>
-                <Icon name="home" />
+                <Icon name="home" size="3x" />
                 <span>Dashboard</span>
               </Link>
             </li>
             <li>
               <Link to={``}>
-                <Icon name="home" />
+                <Icon name="home" size="3x" />
                 <span>Dashboard</span>
               </Link>
             </li>

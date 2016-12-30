@@ -8,29 +8,28 @@
     position: fixed;
     z-index: 904;
     box-shadow: 2px 0 3px rgba(0, 0, 0, .5);
-    height: 66px;
+    height: 40px;
     width: 100%;
     min-width: 320px;
     padding: 0 32px 0 15px;
     div.right-item {
       display: inline-block;
-      margin-top: 15px;
+      margin-top: 5px;
       .info-msg {
         position: relative;
         span.quantity {
-          min-width: 10px;
-          padding: 2px 4px;
+          min-width: 13px;
           color: #fff;
           vertical-align: baseline;
           white-space: nowrap;
           text-align: center;
-          border-radius: 13px;
+          border-radius: 5px;
           text-shadow: none;
           line-height: 11px;
           background-color: #e85656;
           position: absolute;
-          top: 0;
-          right: -12px;
+          top: 4px;
+          right: -6px;
           font-size: 11px;
         }
       }
@@ -42,13 +41,14 @@
       }
     }
     .logo {
+      font-weight: 800;
       font-size: 24px;
-      line-height: 65px;
+      line-height: 45px;
     }
   }
   .sidebar {
-    width: 180px;
-    top: 66px;
+    width: 120px;
+    top: 40px;
     left: 0;
     z-index: 904;
     display: block;
@@ -57,14 +57,27 @@
     height: 100%;
     position: fixed;
     ul {
-      padding-top: 20px;
+      padding: 20px 0 0;
       list-style: none;
       li {
+        text-align: center;
+        padding: 0 15px;
         a {
           display: block;
-          height: 42px;
+          padding: 10px 0;
           &:hover {
             color: #209e91;
+          }
+          .fa {
+            display: block;
+          }
+        }
+      }
+      li.active {
+        background: #209e91;
+        a {
+          &:hover {
+            color: #ffffff;
           }
         }
       }
