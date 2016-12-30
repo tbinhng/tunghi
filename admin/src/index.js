@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { 
-  Router, 
-  Route, 
+import {
+  Router,
+  Route,
   IndexRedirect,
   browserHistory } from 'react-router'
 import {
@@ -11,6 +11,7 @@ import {
 } from 'mobx-react-router'
 import { Provider } from 'mobx-react'
 import App from './App'
+import './bootstrap/_bootstrap.scss';
 import './index.scss'
 import Login from './components/Login'
 

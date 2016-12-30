@@ -1,37 +1,54 @@
 import React, { Component } from 'react'
+import {Modal, Button, Col, FormGroup, Form} from 'react-bootstrap';
 import './index.scss';
-import './auth.scss';
 
 class Login extends Component {
+
+  handleChange(event, type) {
+    let value = event.target.value;
+    if (type === 'username') {
+      this.setState({
+        username: value
+      });
+    } else {
+      this.setState({
+        password: value
+      });
+    }
+  }
+
+  submit() {
+    console.log(this.state.username);
+    console.log(this.state.password);
+  }
+
   render() {
     return (
-      <main className="auth-main">
-        <div className="auth-block">
-          <h1>Sign in</h1>
-          <form className="form-horizontal">
-            <div className="form-group">
-              <label htmlFor="inputEmail3" className="col-sm-2 control-label">Email</label>
+      <div className="static-modal">
+        <Modal.Dialog>
+          <Modal.Body>
+            <h1>Login Tunghi Admin</h1>
+            <Form horizontal>
+              <FormGroup controlId="email">
+                <Col md={2}><label>Email</label></Col>
+                <Col md={10}><input className="login-input" type="text" placeholder="Username" onChange={(event) => this.handleChange(event, 'username')} /></Col>
+              </FormGroup>
 
-              <div className="col-sm-10">
-                <input type="email" className="form-control" id="inputEmail3" placeholder="Email" />
-              </div>
-            </div>
-            <div className="form-group">
-              <label htmlFor="inputPassword3" className="col-sm-2 control-label">Password</label>
+              <FormGroup controlId="password">
+                <Col md={2}><label>Password</label></Col>
+                <Col md={10}><input className="login-input" type="password" placeholder="Password" onChange={(event) => this.handleChange(event, 'password')} /></Col>
+              </FormGroup>
 
-              <div className="col-sm-10">
-                <input type="password" className="form-control" id="inputPassword3" placeholder="Password" />
-              </div>
-            </div>
-            <div className="form-group">
-              <div className="col-sm-offset-2 col-sm-10">
-                <button type="submit" className="btn btn-default btn-auth">Sign in</button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </main>
-    )
+              <FormGroup>
+                <Col smOffset={2} sm={10}>
+                  <Button bsStyle="primary" onClick={this.submit}>Login</Button>
+                </Col>
+              </FormGroup>
+            </Form>
+          </Modal.Body>
+        </Modal.Dialog>
+      </div>
+    );
   }
 }
 
