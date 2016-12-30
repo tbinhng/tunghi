@@ -15,6 +15,7 @@ import './bootstrap/_bootstrap.scss';
 import './index.scss'
 import Login from './components/Login'
 import Admin from './components/Admin'
+import Dashboard from './components/Dashboard'
 
 const RoutingStore = new RouterStore()
 const stores = {
@@ -28,7 +29,9 @@ ReactDOM.render(
       <Route path="/" component={App}>
         <IndexRedirect to='login' />
         <Route path='/login' component={Login} />
-        <Route path='/admin' component={Admin} />
+        <Route path='/admin' component={Admin}>
+          <Route path='/dashboard' component={Dashboard} />
+        </Route>
       </Route>
     </Router>
   </Provider>,

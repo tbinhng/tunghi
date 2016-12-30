@@ -1,0 +1,14 @@
+.dashboard {
+  margin-left: 120px;
+  padding: 40px 0 34px;
+  min-height: 500px;
+  color: #000000;
+  .inner {
+    padding: 20px;
+    h1 {
+      color: #aaaaaa;
+      font-weight: 700;
+      margin: 0;
+    }
+  }
+}

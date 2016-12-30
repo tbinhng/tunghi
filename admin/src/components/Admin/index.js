@@ -1,39 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router';
-import { browserHistory } from 'react-router';
 import { Icon } from 'react-fa';
 import './index.scss';
 
-class Login extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: '',
-      password: ''
-    };
-    this.submit = this.submit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(event, type) {
-    let value = event.target.value;
-    if (type === 'username') {
-      this.setState({
-        username: value
-      });
-    } else {
-      this.setState({
-        password: value
-      });
-    }
-  }
-
-  submit() {
-    console.log(this.state.username);
-    console.log(this.state.password);
-    browserHistory.push('/admin');
-  }
+class Admin extends Component {
 
   render() {
     return (
@@ -56,7 +26,7 @@ class Login extends Component {
         <aside className="sidebar">
           <ul>
             <li className="active">
-              <Link to={``}>
+              <Link to={`/dashboard`}>
                 <Icon name="home" size="3x" />
                 <span>Dashboard</span>
               </Link>
@@ -81,10 +51,11 @@ class Login extends Component {
             </li>
           </ul>
         </aside>
+        {this.props.children}
       </div>
     );
   }
 }
 
 
-export default Login
+export default Admin
