@@ -1,13 +1,14 @@
 import { Schema } from 'mongoose'
+import database from './../database'
 import { isEmail } from './../utils'
 
-const nameSchema = new mongoose.Schema({
+const nameSchema = new Schema({
   first: { type: String, required: true },
   middle: { type: String },
   last: { type: String, required: true }
 })
 
-export default new Schema({
+const schema = new Schema({
   username: { type: String, required: true, unique: true, index: true, trim: true },
   password: { type: String, required: true, select: false },
   email: {
@@ -26,3 +27,5 @@ export default new Schema({
 },
   { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } }
 )
+
+export default database.model('User', schema)

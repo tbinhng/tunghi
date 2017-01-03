@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import db from './../database'
+import User from './../models/user'
 import config from './../config'
 import { isEmail, sha512 } from './../utils'
 
@@ -10,13 +10,13 @@ import { isEmail, sha512 } from './../utils'
  */
 export const getUser = async (token) => {
   if (token) {
-    const user = await db.user.findOne({ token })
+    const user = await User.findOne({ token })
     return user || null
   }
 }
 
 export const register = async (credentials) => {
-  const user = new db.user(credentials)
+  const user = new User(credentials)
   await user.save()
   
   return createAuthToken(user)
@@ -28,7 +28,7 @@ export const login = async (id, password) => {
     credentials.email = id
   } else credentials.username = id
   
-  const user = await db.user.findOne(credentials)
+  const user = await User.findOne(credentials)
   if (!user) return null
 
   return createAuthToken(user)
@@ -37,11 +37,11 @@ export const login = async (id, password) => {
 export const update = async (body, file, token) => {
   let query = {}
 
-  const existed = await db.user.findOne({ username: body.username }, '_id').lean()
+  const existed = await User.findOne({ username: body.username }, '_id').lean()
   if (existed) return false
 
   query = Object.assign({}, query, body)
-  const user = await db.user.findOneAndUpdate({ token }, { $set: query }, { new: true }).lean()
+  const user = await User.findOneAndUpdate({ token }, { $set: query }, { new: true }).lean()
 
   return {
     username: user.username,
@@ -57,7 +57,7 @@ export const update = async (body, file, token) => {
  */
 export const checkAuthorized = async (token) => {
   if (!token) return Promise.reject('Token not provided')
-  const user = await db.user.findOne({ token }, 'token')
+  const user = await User.findOne({ token }, 'token')
   if (user) {
     const decoded = jwt.verify(user.token, config.session.secret)
     if (Date.now() < decoded.expires) {

@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { register } from './../actions/auth'
-import db from './../database'
+import User from './../models/user'
 import { sha512 } from './../utils'
 const router = Router()
 
@@ -18,7 +18,7 @@ router.get('/setup', async (req, res) => {
     admin: true
   };
 
-  const user = await db.user.findOne(credentials)
+  let user = await User.findOne(credentials)
   if (user) {
     res.json('Server has already setup.')
   }

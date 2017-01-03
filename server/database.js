@@ -14,9 +14,4 @@ db.on('error', error => logger('server:mongoError')(error))
 db.once('open', () => logger('server:mongo')(config.databases.mongo))
 
 // Initialize our models
-export default {
-  connection: db,
-  user: db.model('User', require('./models/user')),
-  category: db.model('Category', require('./models/category')),
-  product: db.model('Product', require('./models/product')),
-}
+export default db

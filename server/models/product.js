@@ -1,6 +1,7 @@
 import mongoose, { Schema } from 'mongoose'
+import database from './../database'
 
-const Product = new Schema({
+const schema = new Schema({
   name: { type: String, required: true, unique: true, index: true, trim: true },
   price: { type: Number, required: true },
   category_id: { type: mongoose.Schema.Types.ObjectId, required: true }
@@ -8,7 +9,7 @@ const Product = new Schema({
   { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } }
 )
 
-Product.path('price').get((value) => (value / 100).toFixed(2))
-Product.path('price').set((value) => value * 100)
+schema.path('price').get((value) => (value / 100).toFixed(2))
+schema.path('price').set((value) => value * 100)
 
-export default Product
+export default database.model('Product', schema)
