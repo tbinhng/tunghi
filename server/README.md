@@ -14,6 +14,12 @@ docker-compose up
 * [Node.js](http://nodejs.org/)
 * [MongoDB](https://www.mongodb.org/) 
 
+# Setup
+cd server && npm start
+
+# Initialize admin
+Run: http://localhost:2000/setup
+
 ## License
 
 The MIT License (MIT) Copyright (c)
