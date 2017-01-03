@@ -25,11 +25,11 @@ const stores = {
 }
 const history = syncHistoryWithStore(browserHistory, RoutingStore)
 
-const authRequired = (nextState, replace) => {
-  if (!Auth.isLoggedIn) {
-    replace('/login');
-  }
-}
+// const authRequired = (nextState, replace) => {
+//   if (!Auth.isLoggedIn) {
+//     replace('/login');
+//   }
+// }
 
 ReactDOM.render(
   <Provider {...stores}>
@@ -37,7 +37,7 @@ ReactDOM.render(
       <Route path="/" component={App}>
         <IndexRedirect to='admin' />
         <Route path='/login' component={Login} />
-        <Route path='/admin' component={Admin} onEnter={authRequired}>
+        <Route path='/admin' component={Admin} /*onEnter={authRequired}*/>
           <Route path='/dashboard' component={Dashboard} />
         </Route>
       </Route>
