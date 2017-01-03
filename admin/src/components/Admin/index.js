@@ -9,7 +9,7 @@ class Admin extends Component {
     return (
       <div className="menu">
         <div className="top-page">
-          <Link to={`/client`} className="logo">TUNG HÍ Shop</Link>
+          <Link to={`/client`} className="logo">TUNG HÍ admin</Link>
           <div className="right-item">
             <Link to={`#`} className="left-item info-msg">
               <Icon name="bell-o" />
@@ -51,7 +51,9 @@ class Admin extends Component {
             </li>
           </ul>
         </aside>
-        {this.props.children}
+        <div className="main-content">
+          {this.props.children}
+        </div>
       </div>
     );
   }

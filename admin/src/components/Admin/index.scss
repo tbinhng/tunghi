@@ -8,7 +8,7 @@
     position: fixed;
     z-index: 904;
     box-shadow: 2px 0 3px rgba(0, 0, 0, .5);
-    height: 40px;
+    height: 66px;
     width: 100%;
     min-width: 320px;
     padding: 0 32px 0 15px;
@@ -18,46 +18,45 @@
       .info-msg {
         position: relative;
         span.quantity {
-          min-width: 13px;
+          min-width: 14px;
           color: #fff;
           vertical-align: baseline;
           white-space: nowrap;
           text-align: center;
           border-radius: 5px;
           text-shadow: none;
-          line-height: 11px;
+          line-height: 14px;
           background-color: #e85656;
           position: absolute;
-          top: 4px;
-          right: -6px;
+          top: 12px;
+          right: -10px;
           font-size: 11px;
         }
       }
       .fa {
-        margin-left: 35px;
+        margin-top: 12px;
+        margin-left: 50px;
         &.fa-bell-o {
-          margin-top: 8px;
+          margin-top: 20px;
         }
       }
     }
     .logo {
-      font-weight: 800;
       font-size: 24px;
-      line-height: 45px;
+      line-height: 65px;
     }
   }
   .sidebar {
-    width: 120px;
-    top: 40px;
-    left: 0;
+    position: fixed;
+    width: 185px;
+    top: 66px;
     z-index: 904;
     display: block;
     min-height: 100%;
     background-color: #1C2B36;
     height: 100%;
-    position: fixed;
     ul {
-      padding: 20px 0 0;
+      padding: 40px 0 0;
       list-style: none;
       li {
         text-align: center;
@@ -83,4 +82,10 @@
       }
     }
   }
+  .main-content {
+    margin-left: 185px;
+    padding: 66px 0 34px;
+    min-height: 500px;
+  }
 }
+
