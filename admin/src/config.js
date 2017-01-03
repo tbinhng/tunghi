@@ -1,4 +1,4 @@
-export const WS_BASE_URL = 'http://localhost:8000/ws'
+export const WS_BASE_URL = 'http://localhost:2000/api'
 export const PASSWORD_KEY = 'e86saAgp9FJqpBJY=!+?jZRuBSAd^^XF'
 export const ACCESS_TOKEN_PATH = 'token'
 

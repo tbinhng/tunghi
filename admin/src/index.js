@@ -10,7 +10,7 @@ import {
   syncHistoryWithStore
 } from 'mobx-react-router'
 import { Provider } from 'mobx-react'
-import App from './App'
+import App from './components/App'
 import './bootstrap/_bootstrap.scss';
 import './index.scss'
 import Login from './components/Login'

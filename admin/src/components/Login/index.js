@@ -1,37 +1,53 @@
-import React, { Component } from 'react'
-import {Modal, Button, Col, FormGroup, Form} from 'react-bootstrap';
-import {browserHistory} from 'react-router';
-import './index.scss';
+import './index.scss'
+import React, { Component, PropTypes } from 'react'
+import { observer, inject } from 'mobx-react'
+import { 
+  Modal, 
+  Button, 
+  Col, 
+  FormGroup, 
+  FormControl, 
+  Form,
+  HelpBlock
+} from 'react-bootstrap'
+import BaseForm from './../Common/BaseForm'
 
-class Login extends Component {
+@inject('auth')
+@observer class Login extends Component {
+  static contextTypes = {
+    router: PropTypes.object.isRequired
+  }
 
   constructor(props) {
-    super(props);
-    this.state = {
-      username: '',
-      password: ''
-    };
-    this.submit = this.submit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    super(props)
+
+    this.onSuccess = this.onSuccess.bind(this)
+    this.form = new BaseForm({
+      id: {
+        name: 'id',
+        label: 'Username or Email',
+        default: '',
+        rules: 'required|string',
+      },
+      password: {
+        name: 'password',
+        label: 'Password',
+        default: '',
+        rules: 'required|string|between:5,25',
+      }
+    })
   }
 
-  handleChange(event, type) {
-    let value = event.target.value;
-    if (type === 'username') {
-      this.setState({
-        username: value
-      });
-    } else {
-      this.setState({
-        password: value
-      });
-    }
-  }
-
-  submit() {
-    console.log(this.state.username);
-    console.log(this.state.password);
-    browserHistory.push('/admin');
+  onSuccess(form) {
+    const { auth } = this.props;
+    auth.login(form.values()).then(() => {
+      // this.state.error = null
+      // this.state.isLoading = false
+      this.context.router.push('/')
+    }).catch(error => {
+      // this.state.error = error
+      // this.state.isLoading = false
+    })
   }
 
   render() {
@@ -40,29 +56,55 @@ class Login extends Component {
         <Modal.Dialog>
           <Modal.Body>
             <h1>Login Tunghi Admin</h1>
-            <Form horizontal>
-              <FormGroup controlId="email">
-                <Col md={2}><label>Email</label></Col>
-                <Col md={10}><input className="login-input" type="text" placeholder="Username" onChange={(event) => this.handleChange(event, 'username')} /></Col>
+            <Form
+              horizontal
+              autoComplete="off"
+              onSubmit={e => this.form.onSubmit(e, { onSuccess: this.onSuccess })}>
+              <FormGroup controlId="id" validationState={this.form.$('id').error ? 'error' : 'success'}>
+                <Col md={12}>
+                  <FormControl
+                    name={this.form.$('id').name}
+                    value={this.form.$('id').value}
+                    className="login-input"
+                    type="text"
+                    placeholder={this.form.$('id').label}
+                    autoComplete="off"
+                    onChange={this.form.$('id').sync} />
+                  <FormControl.Feedback />
+                  <HelpBlock>{this.form.$('id').error || ''}</HelpBlock>
+                </Col>
               </FormGroup>
 
-              <FormGroup controlId="password">
-                <Col md={2}><label>Password</label></Col>
-                <Col md={10}><input className="login-input" type="password" placeholder="Password" onChange={(event) => this.handleChange(event, 'password')} /></Col>
+              <FormGroup controlId="password" validationState={this.form.$('password').error ? 'error' : 'success'}>
+                <Col md={12}>
+                  <FormControl 
+                    name={this.form.$('password').name}
+                    value={this.form.$('password').value}
+                    className="login-input" 
+                    type="password" 
+                    placeholder={this.form.$('password').label} 
+                    onChange={this.form.$('password').sync} />
+                  <FormControl.Feedback />
+                  <HelpBlock>{this.form.$('password').error || ''}</HelpBlock>
+                </Col>
               </FormGroup>
 
               <FormGroup>
                 <Col smOffset={2} sm={10}>
-                  <Button bsStyle="primary" onClick={this.submit}>Login</Button>
+                  <Button 
+                    bsStyle="primary" 
+                    disabled={!(this.form.$('id').isDirty && this.form.$('password').isDirty && this.form.$('id').isValid && this.form.$('password').isValid)}
+                    onClick={this.submit}>
+                    Login
+                  </Button>
                 </Col>
               </FormGroup>
             </Form>
           </Modal.Body>
         </Modal.Dialog>
       </div>
-    );
+    )
   }
 }
-
 
 export default Login
