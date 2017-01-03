@@ -8,6 +8,7 @@ import morgan from 'morgan'
 import jwt from 'jsonwebtoken'
 // import schema from './graphql'
 import config from './config'
+import cors from 'cors'
 
 // Routes module
 import setup from './routes/setup'
@@ -17,6 +18,9 @@ var app = express()
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
+
+// Enabled CORS request
+app.use(cors());
 
 app.use(setup)
 // Authentication route
