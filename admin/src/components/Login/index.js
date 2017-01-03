@@ -60,7 +60,7 @@ import BaseForm from './../Common/BaseForm'
               horizontal
               autoComplete="off"
               onSubmit={e => this.form.onSubmit(e, { onSuccess: this.onSuccess })}>
-              <FormGroup controlId="id" validationState={this.form.$('id').error ? 'error' : 'success'}>
+              <FormGroup controlId="id" validationState={this.form.$('id').hasError ? 'error' : 'success'}>
                 <Col md={12}>
                   <FormControl
                     name={this.form.$('id').name}
@@ -75,7 +75,7 @@ import BaseForm from './../Common/BaseForm'
                 </Col>
               </FormGroup>
 
-              <FormGroup controlId="password" validationState={this.form.$('password').error ? 'error' : 'success'}>
+              <FormGroup controlId="password" validationState={this.form.$('password').hasError ? 'error' : 'success'}>
                 <Col md={12}>
                   <FormControl 
                     name={this.form.$('password').name}
