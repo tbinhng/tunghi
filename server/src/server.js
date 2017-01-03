@@ -6,9 +6,10 @@ import morgan from 'morgan'
 import compression from 'compression'
 
 import jwt from 'jsonwebtoken'
+import cors from 'cors'
+
 // import schema from './graphql'
 import config from './config'
-import cors from 'cors'
 
 // Routes module
 import setup from './routes/setup'

@@ -13,5 +13,4 @@ const db = mongoose.connection
 db.on('error', error => logger('server:mongoError')(error))
 db.once('open', () => logger('server:mongo')(config.databases.mongo))
 
-// Initialize our models
 export default db

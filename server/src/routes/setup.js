@@ -18,9 +18,9 @@ router.get('/setup', async (req, res) => {
     admin: true
   };
 
-  let user = await User.findOne(credentials)
+  let user = await User.findOne({username: 'tunghi'})
   if (user) {
-    res.json('Server has already setup.')
+    return res.json('Server has already setup.')
   }
   await register(credentials)
 
