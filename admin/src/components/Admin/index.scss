@@ -50,32 +50,27 @@
     position: fixed;
     width: 185px;
     top: 66px;
-    z-index: 904;
+    z-index: 900;
     display: block;
     min-height: 100%;
     background-color: #1C2B36;
     height: 100%;
     ul {
-      padding: 40px 0 0;
+      padding: 35px 0 0;
       list-style: none;
       li {
-        text-align: center;
-        padding: 0 15px;
         a {
           display: block;
-          padding: 10px 0;
+          padding: 10px 20px;
           &:hover {
             color: #209e91;
           }
-          .fa {
-            display: block;
-            margin-bottom: 5px;
+          span.fa {
+            margin-right: 20px;
           }
         }
-      }
-      li.active {
-        background: #209e91;
-        a {
+        a.active {
+          background: #209e91;
           &:hover {
             color: #ffffff;
           }
@@ -84,9 +79,30 @@
     }
   }
   .main-content {
+    overflow: hidden;
     margin-left: 185px;
-    padding: 66px 0 34px;
+    padding: 86px 0 30px 40px;
     min-height: 500px;
+    h1 {
+      color: #aaaaaa;
+      font-weight: 700;
+      margin: 0;
+    }
+    .breadcrumb {
+      background-color: transparent;
+      padding-right: 40px;
+      li {
+        font-size: 18px;
+        a {
+          color: #209e91;
+        }
+      }
+      li.active {
+        a {
+          color: #666666;
+        }
+      }
+    }
   }
 }
 
