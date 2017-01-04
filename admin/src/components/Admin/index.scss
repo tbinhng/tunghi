@@ -81,28 +81,16 @@
   .main-content {
     overflow: hidden;
     margin-left: 185px;
-    padding: 86px 0 30px 40px;
+    padding: 86px 40px 30px;
     min-height: 500px;
     h1 {
       text-transform: capitalize;
       color: #aaaaaa;
       font-weight: 700;
       margin: 0;
-    }
-    .breadcrumb {
-      background-color: transparent;
-      padding-right: 40px;
-      li {
-        font-size: 18px;
-        a {
-          color: #209e91;
-        }
-      }
-      li.active {
-        a {
-          color: #666666;
-        }
-      }
+      padding-bottom: 5px;
+      margin-bottom: 30px;
+      border-bottom: 1px solid #dddddd;
     }
   }
 }

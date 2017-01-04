@@ -83,7 +83,7 @@ class Admin extends Component {
           </ul>
         </aside>
         <div className="main-content">
-          <h1 className="left-item">{this.state.pageName}</h1>
+          <h1>{this.state.pageName}</h1>
           {this.props.children}
         </div>
       </div>
