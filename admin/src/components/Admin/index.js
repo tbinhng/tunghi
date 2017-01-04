@@ -1,10 +1,25 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router';
+import {Link, browserHistory} from 'react-router';
 import {Icon} from 'react-fa';
-import {Breadcrumb} from 'react-bootstrap';
 import './index.scss';
 
 class Admin extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      pageName: props.location.pathname.substring(1)
+    }
+  }
+
+  componentWillMount() {
+    
+    browserHistory.listen(location => {
+      this.setState({
+        pageName: location.pathname.substring(1)
+      });
+    });
+  }
 
   render() {
     return (
@@ -51,18 +66,7 @@ class Admin extends Component {
           </ul>
         </aside>
         <div className="main-content">
-          <h1 className="left-item">Dashboard</h1>
-          <Breadcrumb className="right-item">
-            <Breadcrumb.Item href="#">
-              Home
-            </Breadcrumb.Item>
-            <Breadcrumb.Item href="">
-              Library
-            </Breadcrumb.Item>
-            <Breadcrumb.Item active>
-              Data
-            </Breadcrumb.Item>
-          </Breadcrumb>
+          <h1 className="left-item">{this.state.pageName}</h1>
           {this.props.children}
         </div>
       </div>

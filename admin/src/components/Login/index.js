@@ -1,6 +1,6 @@
-import './index.scss'
-import React, { Component, PropTypes } from 'react'
-import { observer, inject } from 'mobx-react'
+import './index.scss';
+import React, { Component, PropTypes } from 'react';
+import { observer, inject } from 'mobx-react';
 import { 
   Modal, 
   Button, 
@@ -9,8 +9,10 @@ import {
   FormControl, 
   Form,
   HelpBlock
-} from 'react-bootstrap'
-import BaseForm from './../Common/BaseForm'
+} from 'react-bootstrap';
+import BaseForm from './../Common/BaseForm';
+import {Icon} from 'react-fa';
+import {Link} from 'react-router';
 
 @inject('auth')
 @observer class Login extends Component {
@@ -56,6 +58,10 @@ import BaseForm from './../Common/BaseForm'
         <Modal.Dialog>
           <Modal.Body>
             <h1>Login Tunghi Admin</h1>
+            <Link to={``} className="fb-login">
+              <Icon name="facebook-official" size="2x" />
+              <span>Login with FB account</span>
+            </Link>
             <Form
               horizontal
               autoComplete="off"
