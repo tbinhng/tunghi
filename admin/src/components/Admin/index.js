@@ -13,7 +13,6 @@ class Admin extends Component {
   }
 
   componentWillMount() {
-    
     browserHistory.listen(location => {
       this.setState({
         pageName: location.pathname.substring(1)
@@ -25,7 +24,7 @@ class Admin extends Component {
     return (
       <div className="menu">
         <div className="top-page">
-          <Link to={`/client`} className="logo">TUNG HÍ admin</Link>
+          <Link to={`/client`} className="logo"><span className="color-green">TUNG HÍ</span> admin</Link>
           <div className="right-item">
             <Link to={`#`} className="left-item info-msg">
               <Icon name="bell-o"/>
@@ -42,25 +41,43 @@ class Admin extends Component {
             <li>
               <Link to={`/dashboard`} activeClassName="active">
                 <Icon name="home" />
-                <span>Dashboard</span>
+                <span>Thống kê</span>
               </Link>
             </li>
             <li>
               <Link to={`/product`} activeClassName="active">
                 <Icon name="shopping-cart" />
-                <span>Product</span>
+                <span>Sản phẩm</span>
               </Link>
             </li>
             <li>
               <Link to={`/user`} activeClassName="active">
-                <Icon name="user" />
-                <span>User</span>
+                <Icon name="users" />
+                <span>Thành viên</span>
+              </Link>
+            </li>
+            <li>
+              <Link to={`/setting`} activeClassName="active">
+                <Icon name="envelope" />
+                <span>Hộp thư</span>
+              </Link>
+            </li>
+            <li>
+              <Link to={`/setting`} activeClassName="active">
+                <Icon name="comments" />
+                <span>Bình luận</span>
+              </Link>
+            </li>
+            <li>
+              <Link to={`/setting`} activeClassName="active">
+                <Icon name="shopping-bag" />
+                <span>Hóa đơn</span>
               </Link>
             </li>
             <li>
               <Link to={`/setting`} activeClassName="active">
                 <Icon name="wrench" />
-                <span>Setting</span>
+                <span>Thiết lập</span>
               </Link>
             </li>
           </ul>
