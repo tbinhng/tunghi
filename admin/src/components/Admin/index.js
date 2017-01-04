@@ -27,26 +27,26 @@ class Admin extends Component {
           <ul>
             <li className="active">
               <Link to={`/dashboard`}>
-                <Icon name="home" size="3x" />
+                <Icon name="home" size="2x" />
                 <span>Dashboard</span>
               </Link>
             </li>
             <li>
               <Link to={``}>
-                <Icon name="home" size="3x" />
-                <span>Dashboard</span>
+                <Icon name="shopping-cart" size="2x" />
+                <span>Product</span>
               </Link>
             </li>
             <li>
               <Link to={``}>
-                <Icon name="home" size="3x" />
-                <span>Dashboard</span>
+                <Icon name="home" size="2x" />
+                <span>Product</span>
               </Link>
             </li>
             <li>
               <Link to={``}>
-                <Icon name="home" size="3x" />
-                <span>Dashboard</span>
+                <Icon name="home" size="2x" />
+                <span>Product</span>
               </Link>
             </li>
           </ul>

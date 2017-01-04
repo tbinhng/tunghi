@@ -35,7 +35,7 @@ ReactDOM.render(
   <Provider {...stores}>
     <Router history={history}>
       <Route path="/" component={App}>
-        <IndexRedirect to='admin' />
+        <IndexRedirect to='dashboard' />
         <Route path='/login' component={Login} />
         <Route path='/admin' component={Admin} /*onEnter={authRequired}*/>
           <Route path='/dashboard' component={Dashboard} />
