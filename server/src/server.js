@@ -4,8 +4,6 @@ import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import morgan from 'morgan'
 import compression from 'compression'
-
-import jwt from 'jsonwebtoken'
 import cors from 'cors'
 
 // import schema from './graphql'

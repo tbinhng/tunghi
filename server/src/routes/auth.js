@@ -1,8 +1,18 @@
 import { Router } from 'express'
-import { register, login, update } from './../actions/auth'
+import { register, login, update, getUser } from './../actions/auth'
 import authorize from './../middleware/authorize'
 import User from './../models/user'
+
 const router = Router()
+
+router.get('/api/auth/me', async (req, res) => {
+  if (!req.token) {
+    return res.json(false)
+  }
+
+  const user = await getUser(req.token)
+  res.json(user)
+})
 
 router.post('/api/auth/login', async (req, res) => {
   const { id, password } = req.body
@@ -11,7 +21,7 @@ router.post('/api/auth/login', async (req, res) => {
     return res.status(400).send('Credentials is invalid')
   }
 
-  return res.json(token)
+  return res.json({ token })
 })
 
 router.get('/api/auth/logout', async (req, res) => {
@@ -24,11 +34,12 @@ router.get('/api/auth/logout', async (req, res) => {
 })
 
 router.post('/api/auth/register', async (req, res) => {
-  const { username, password } = req.body
-  let user = await User.count({ username })
-  if (user) return res.status(400).send('Username already taken')
+  const { email, password } = req.body
 
-  user = await register({ username, password })
+  const isTaken = await User.count({ email })
+  if (isTaken) return res.status(400).send('Email already taken')
+
+  const user = await register(email, password)
   res.json(user)
 })
 

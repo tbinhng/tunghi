@@ -15,11 +15,15 @@ export const getUser = async (token) => {
   }
 }
 
-export const register = async (credentials) => {
+export const register = async (email, password) => {
+  const credentials = { email, password: sha512(password) };
   const user = new User(credentials)
   await user.save()
-  
-  return createAuthToken(user)
+
+  user.token = createAuthToken(user._id)
+  await user.save()
+
+  return token
 }
 
 export const login = async (id, password) => {
@@ -31,7 +35,10 @@ export const login = async (id, password) => {
   const user = await User.findOne(credentials)
   if (!user) return null
 
-  return createAuthToken(user)
+  user.token = createAuthToken(user._id)
+  await user.save()
+
+  return token
 }
 
 export const update = async (body, file, token) => {
@@ -40,14 +47,9 @@ export const update = async (body, file, token) => {
   const existed = await User.findOne({ username: body.username }, '_id').lean()
   if (existed) return false
 
-  query = Object.assign({}, query, body)
+  query = {...query, ...body}
   const user = await User.findOneAndUpdate({ token }, { $set: query }, { new: true }).lean()
-
-  return {
-    username: user.username,
-    description: user.description,
-    picture: user.picture
-  }
+  return user
 }
 
 /**
