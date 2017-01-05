@@ -20,6 +20,9 @@ import Admin from './components/Admin'
 import Dashboard from './components/Dashboard'
 import Product from './components/Product'
 import User from './components/User'
+import Comment from './components/Comment'
+import Email from './components/Email'
+import Invoice from './components/Invoice'
 import Setting from './components/Setting'
 import Auth from './stores/auth'
 
@@ -46,6 +49,9 @@ ReactDOM.render(
         <Route component={Admin} onEnter={authRequired}>
           <Route name='Dashboard' path='dashboard' component={Dashboard} />
           <Route name='Products' path='product' component={Product} />
+          <Route name='Comments' path='comment' component={Comment} />
+          <Route name='Emails' path='email' component={Email} />
+          <Route name='Invoices' path='invoice' component={Invoice} />
           <Route name='Users' path='user' component={User} />
           <Route name='Settings' path='setting' component={Setting} />
         </Route>
