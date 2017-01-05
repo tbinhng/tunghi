@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
-import { Link, browserHistory } from 'react-router'
+import { Link } from 'react-router'
 import { Icon } from 'react-fa'
 import {PageHeader} from 'react-bootstrap';
 import './index.scss'
@@ -9,19 +9,8 @@ import Loading from './../Common/Loading'
 @inject('auth')
 @observer class Admin extends Component {
   constructor(props) {
-    super(props)
-    this.state = {
-      pageName: props.location.pathname.substring(1)
-    }
+    super(props);
     this.auth = props.auth
-  }
-
-  componentWillMount() {
-    browserHistory.listen(location => {
-      this.setState({
-        pageName: location.pathname.substring(1)
-      });
-    });
   }
 
   componentDidMount() {
@@ -29,7 +18,7 @@ import Loading from './../Common/Loading'
   }
 
   render() {
-    if (!this.auth.isLoading) {
+    if (!this.auth.isLoggedIn) {
       return <Loading />
     }
 
@@ -51,43 +40,43 @@ import Loading from './../Common/Loading'
         <aside className="sidebar">
           <ul>
             <li>
-              <Link to={`/dashboard`} activeClassName="active">
+              <Link to={`/admin/dashboard`} activeClassName="active">
                 <Icon name="home" />
                 <span>Thống kê</span>
               </Link>
             </li>
             <li>
-              <Link to={`/product`} activeClassName="active">
+              <Link to={`/admin/product`} activeClassName="active">
                 <Icon name="shopping-cart" />
                 <span>Sản phẩm</span>
               </Link>
             </li>
             <li>
-              <Link to={`/user`} activeClassName="active">
+              <Link to={`/admin/user`} activeClassName="active">
                 <Icon name="users" />
                 <span>Thành viên</span>
               </Link>
             </li>
             <li>
-              <Link to={`/email`} activeClassName="active">
+              <Link to={`/admin/email`} activeClassName="active">
                 <Icon name="envelope" />
                 <span>Hộp thư</span>
               </Link>
             </li>
             <li>
-              <Link to={`/comment`} activeClassName="active">
+              <Link to={`/admin/comment`} activeClassName="active">
                 <Icon name="comments" />
                 <span>Bình luận</span>
               </Link>
             </li>
             <li>
-              <Link to={`/invoice`} activeClassName="active">
+              <Link to={`/admin/invoice`} activeClassName="active">
                 <Icon name="shopping-bag" />
                 <span>Hóa đơn</span>
               </Link>
             </li>
             <li>
-              <Link to={`/setting`} activeClassName="active">
+              <Link to={`/admin/setting`} activeClassName="active">
                 <Icon name="wrench" />
                 <span>Thiết lập</span>
               </Link>
@@ -95,7 +84,7 @@ import Loading from './../Common/Loading'
           </ul>
         </aside>
         <div className="main-content">
-          <PageHeader>{this.state.pageName}</PageHeader>
+          <PageHeader>{this.props.routes[this.props.routes.length-1].name}</PageHeader>
           {this.props.children}
         </div>
       </div>
