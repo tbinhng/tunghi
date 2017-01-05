@@ -65,12 +65,14 @@ import Facebook from './../Common/Facebook'
         <Modal.Dialog>
           <Modal.Body>
             <h1>Login Tunghi Admin</h1>
-            <Facebook
-              appId="1426953154015836"
-              autoLoad={true}
-              fields="name,email,picture"
-              onClick={this.componentClicked}
-              callback={this.responseFacebook} />
+            <div className="fb-login">
+              <Facebook
+                appId="1426953154015836"
+                autoLoad={true}
+                fields="name,email,picture"
+                onClick={this.componentClicked}
+                callback={this.responseFacebook} />
+            </div>
             <Form
               horizontal
               autoComplete="off"
