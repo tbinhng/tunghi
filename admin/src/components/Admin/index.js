@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
-import { Link } from 'react-router'
+import { Link, browserHistory } from 'react-router'
 import { Icon } from 'react-fa'
 import {PageHeader} from 'react-bootstrap';
 import './index.scss'
@@ -10,8 +10,18 @@ import Loading from './../Common/Loading'
 @observer class Admin extends Component {
   constructor(props) {
     super(props)
-
+    this.state = {
+      pageName: props.location.pathname.substring(1)
+    }
     this.auth = props.auth
+  }
+
+  componentWillMount() {
+    browserHistory.listen(location => {
+      this.setState({
+        pageName: location.pathname.substring(1)
+      });
+    });
   }
 
   componentDidMount() {
@@ -19,7 +29,7 @@ import Loading from './../Common/Loading'
   }
 
   render() {
-    if (!this.auth.isAuthenticated) {
+    if (!this.auth.isLoading) {
       return <Loading />
     }
 
