@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
+@mixin green {
+  color: #209e91;
+}
 
 body {
   margin: 0;
@@ -19,9 +22,18 @@ img {
 }
 
 .color-green {
-  color: #209e91;
+  @include green();
 }
 
-.add-btn {
-  margin-bottom: 10px;
+.hover-green {
+  &:hover {
+    @include green();
+  }
+}
+
+.hover-scale {
+    &:hover {
+        transform: scale(1.1);
+        transition: transform .2s ease;
+    }
 }

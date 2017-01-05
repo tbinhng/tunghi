@@ -1,15 +1,42 @@
 import React, {Component} from 'react';
-import {Table, Button} from 'react-bootstrap';
+import {Table, Button, Pagination} from 'react-bootstrap';
 import {Link} from 'react-router';
 import productImg from '../../assets/products/product-img.jpg';
 import './index.scss';
 
 class Product extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      activePage: 1
+    };
+
+    this.handleSelect = this
+      .handleSelect
+      .bind(this);
+  }
+
+  handleSelect(event) {
+    this.setState({activePage: event});
+  }
+
   render() {
     return (
       <div className="product-list">
-        <Button bsStyle="primary" className="add-btn">Thêm sản phẩm</Button>
-        <Table striped bordered condensed hover>
+        <div className="table-utils">
+          <Button bsStyle="primary" className="add-btn left-item hover-scale">Thêm sản phẩm</Button>
+          <Pagination
+            className="right-item"
+            first
+            last
+            items={10}
+            maxButtons={5}
+            activePage={this.state.activePage}
+            onSelect={this.handleSelect}/>
+        </div>
+
+        <Table bordered condensed hover>
           <thead>
             <tr>
               <th>#</th>
@@ -29,7 +56,10 @@ class Product extends Component {
               <td>@mdo</td>
               <td>2,000,000</td>
               <td>20</td>
-              <td><Button bsStyle="warning">Edit</Button><Button bsStyle="danger">Delete</Button></td>
+              <td className="action">
+                <Button bsStyle="warning" className="edit-btn hover-scale">Edit</Button>
+                <Button bsStyle="danger" className="hover-scale">Delete</Button>
+              </td>
             </tr>
             <tr>
               <td>2</td>
@@ -38,7 +68,10 @@ class Product extends Component {
               <td>@fat</td>
               <td>2,000,000</td>
               <td>20</td>
-              <td><Button bsStyle="warning">Edit</Button><Button bsStyle="danger">Delete</Button></td>
+              <td className="action">
+                <Button bsStyle="warning" className="edit-btn hover-scale">Edit</Button>
+                <Button bsStyle="danger" className="hover-scale">Delete</Button>
+              </td>
             </tr>
             <tr>
               <td>3</td>
@@ -47,7 +80,10 @@ class Product extends Component {
               <td>@twitter</td>
               <td>2,000,000</td>
               <td>20</td>
-              <td><Button bsStyle="warning">Edit</Button><Button bsStyle="danger">Delete</Button></td>
+              <td className="action">
+                <Button bsStyle="warning" className="edit-btn hover-scale">Edit</Button>
+                <Button bsStyle="danger" className="hover-scale">Delete</Button>
+              </td>
             </tr>
           </tbody>
         </Table>

@@ -1,8 +1,51 @@
 .product-list {
-    .product-img {
-        width: 150px;
-        a {
-            display: block;
+    .btn-primary,
+    .btn-warning {
+        background: #209e91;
+        border-color: #209e91;
+    }
+    
+    .btn-danger {
+        background: #e85656;
+        border-color: #e85656;
+    }
+    .table-utils {
+        overflow: hidden;
+        margin-bottom: 10px;
+        .btn-primary {
+            margin: 8px;
+        }
+        .pagination {
+            margin: 8px 0;
+            li {
+                &.active {
+                    a {
+                        background: #209e91;
+                        border-color: #209e91;
+                    }
+                }
+            }
         }
     }
+    td {
+        &.product-img {
+            width: 100px;
+            a {
+                display: block;
+            }
+        }
+        &.action {
+            padding: 30px 20px 0;
+            overflow: hidden;
+            width: 220px;
+            .btn {
+                float: right;
+                width: 80px;
+            }
+            .edit-btn {
+                float: left;
+            }
+        }
+    }
+    
 }
