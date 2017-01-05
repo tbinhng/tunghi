@@ -1,38 +1,39 @@
-import React, {Component} from 'react'
-import {Link, browserHistory} from 'react-router';
-import {Icon} from 'react-fa';
-import './index.scss';
+import React, { Component } from 'react'
+import { observer, inject } from 'mobx-react'
+import { Link } from 'react-router'
+import { Icon } from 'react-fa'
+import './index.scss'
+import Loading from './../Common/Loading'
 
-class Admin extends Component {
-
+@inject('auth')
+@observer class Admin extends Component {
   constructor(props) {
-    super(props);
-    this.state = {
-      pageName: props.location.pathname.substring(1)
-    }
+    super(props)
+
+    this.auth = props.auth
   }
 
-  componentWillMount() {
-    browserHistory.listen(location => {
-      this.setState({
-        pageName: location.pathname.substring(1)
-      });
-    });
+  componentDidMount() {
+    this.auth.me()
   }
 
   render() {
+    if (!this.auth.isAuthenticated) {
+      return <Loading />
+    }
+
     return (
       <div className="menu">
         <div className="top-page">
           <Link to={`/client`} className="logo"><span className="color-green">TUNG HÍ</span> admin</Link>
           <div className="right-item">
             <Link to={`#`} className="left-item info-msg">
-              <Icon name="bell-o"/>
+              <Icon name="bell-o" />
               <span className="quantity">5</span>
               <ul></ul>
             </Link>
             <Link to={`/`} className="left-item">
-              <Icon name="sign-out" size="2x"/>
+              <Icon name="sign-out" size="2x" />
             </Link>
           </div>
         </div>
@@ -83,11 +84,10 @@ class Admin extends Component {
           </ul>
         </aside>
         <div className="main-content">
-          <h1>{this.state.pageName}</h1>
           {this.props.children}
         </div>
       </div>
-    );
+    )
   }
 }
 

@@ -14,7 +14,7 @@ export const checkHttpStatus = (response) => {
       return window.location.href = '/login'
     }
 
-    return parseJSON(response)
+    return response.json()
   } else {
     var error = new Error(response.statusText)
     error.response = response

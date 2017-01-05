@@ -4,6 +4,8 @@ import {
   Router,
   Route,
   IndexRedirect,
+  IndexRoute,
+  Redirect,
   browserHistory } from 'react-router'
 import {
   RouterStore,
@@ -28,23 +30,24 @@ const stores = {
 }
 const history = syncHistoryWithStore(browserHistory, RoutingStore)
 
-// const authRequired = (nextState, replace) => {
-//   if (!Auth.isLoggedIn) {
-//     replace('/login');
-//   }
-// }
+const authRequired = (nextState, replace) => {
+  if (!Auth.isLoggedIn) {
+    replace('/admin/login');
+  }
+}
 
 ReactDOM.render(
   <Provider {...stores}>
     <Router history={history}>
-      <Route path="/" component={App}>
+      <Redirect from='/' to='admin' />
+      <Route path="admin" component={App}>
         <IndexRedirect to='dashboard' />
-        <Route path='/login' component={Login} />
-        <Route path='/admin' component={Admin} /*onEnter={authRequired}*/>
-          <Route path='/dashboard' component={Dashboard} />
-          <Route path='/product' component={Product} />
-          <Route path='/user' component={User} />
-          <Route path='/setting' component={Setting} />
+        <Route path='login' component={Login} />
+        <Route path='dashboard' component={Admin} onEnter={authRequired}>
+          <IndexRoute name='Dashboard' component={Dashboard} />
+          <Route name='Products' path='product' component={Product} />
+          <Route name='Users' path='user' component={User} />
+          <Route name='Settings' path='setting' component={Setting} />
         </Route>
       </Route>
     </Router>

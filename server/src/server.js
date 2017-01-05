@@ -10,8 +10,8 @@ import cors from 'cors'
 import config from './config'
 
 // Routes module
-import setup from './routes/setup'
-import auth from './routes/auth'
+import setupRoute from './routes/setup'
+import authRoutes from './routes/auth'
 
 var app = express()
 
@@ -24,9 +24,9 @@ app.use(cors());
 // Compacting requests using GZIP middleware
 app.use(compression())
 
-app.use(setup)
+app.use(setupRoute)
 // Authentication route
-app.use(auth)
+app.use('/api/auth', authRoutes)
 // GraphqQL server route
 // app.use('/graphql', graphqlHTTP(req => ({
 //   schema,

@@ -45,13 +45,9 @@ export class Auth extends Singleton {
 
     try {
       await this.service.fetchToken(credentials)
-      runInAction('update auth state', () => {
-        this.error = null
-        this.loading = false
-      })
+      this.handleSuccessRequest()
     } catch (error) {
-      this.loading = false
-      this.error = error
+      this.handleFailureRequest(error)
     }
   }
 
@@ -60,21 +56,32 @@ export class Auth extends Singleton {
     this.loading = true
 
     try {
-      let user = await this.service.fetchAuthedUser()
-      runInAction('get auth user', () => {
-        this.user = user
-        this.error = null
-        this.loading = false
-      })
+      this.user = await this.service.fetchAuthedUser()
+      this.handleSuccessRequest()
     } catch (error) {
-      this.loading = false
-      this.error = error
+      this.handleFailureRequest(error)
     }
   }
 
   @action
-  logout() {
-    Store.remove(ACCESS_TOKEN_PATH)
+  handleSuccessRequest() {
+    runInAction('handleSuccessRequest', () => {
+      this.error = null
+      this.loading = false
+    })
+  }
+
+  @action
+  handleFailureRequest(error) {
+    runInAction('handleFailureRequest', () => {
+      this.error = error
+      this.loading = false
+    })
+  }
+
+  @action
+  async logout() {
+    await this.service.logout()
   }
 
 }

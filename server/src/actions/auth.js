@@ -15,15 +15,15 @@ export const getUser = async (token) => {
   }
 }
 
-export const register = async (email, password) => {
-  const credentials = { email, password: sha512(password) };
+export const register = async (credentials) => {
   const user = new User(credentials)
+  user.hashPassword()
   await user.save()
 
   user.token = createAuthToken(user._id)
   await user.save()
 
-  return token
+  return true
 }
 
 export const login = async (id, password) => {
@@ -38,7 +38,7 @@ export const login = async (id, password) => {
   user.token = createAuthToken(user._id)
   await user.save()
 
-  return token
+  return user.token
 }
 
 export const update = async (body, file, token) => {
@@ -62,7 +62,7 @@ export const checkAuthorized = async (token) => {
   const user = await User.findOne({ token }, 'token')
   if (user) {
     const decoded = jwt.verify(user.token, config.session.secret)
-    if (Date.now() < decoded.expires) {
+    if (Date.now() < decoded.exp) {
       return Promise.resolve(user)
     }
   }
