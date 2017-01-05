@@ -4,7 +4,7 @@ import {
   Router,
   Route,
   IndexRedirect,
-  IndexRoute,
+  // IndexRoute,
   Redirect,
   browserHistory } from 'react-router'
 import {
@@ -13,14 +13,14 @@ import {
 } from 'mobx-react-router'
 import { Provider } from 'mobx-react'
 import App from './components/App'
-import './bootstrap/_bootstrap.scss';
+import './bootstrap/_bootstrap.scss'
 import './index.scss'
 import Login from './components/Login'
 import Admin from './components/Admin'
 import Dashboard from './components/Dashboard'
-import Product from './components/Product';
-import User from './components/User';
-import Setting from './components/Setting';
+import Product from './components/Product'
+import User from './components/User'
+import Setting from './components/Setting'
 import Auth from './stores/auth'
 
 const RoutingStore = new RouterStore()
@@ -32,7 +32,7 @@ const history = syncHistoryWithStore(browserHistory, RoutingStore)
 
 const authRequired = (nextState, replace) => {
   if (!Auth.isLoggedIn) {
-    replace('/admin/login');
+    replace('/admin/login')
   }
 }
 
@@ -43,8 +43,8 @@ ReactDOM.render(
       <Route path="admin" component={App}>
         <IndexRedirect to='dashboard' />
         <Route path='login' component={Login} />
-        <Route path='dashboard' component={Admin} onEnter={authRequired}>
-          <IndexRoute name='Dashboard' component={Dashboard} />
+        <Route component={Admin} onEnter={authRequired}>
+          <Route name='Dashboard' path='dashboard' component={Dashboard} />
           <Route name='Products' path='product' component={Product} />
           <Route name='Users' path='user' component={User} />
           <Route name='Settings' path='setting' component={Setting} />

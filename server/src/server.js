@@ -25,9 +25,9 @@ app.use(cors());
 app.use(compression())
 
 app.use(setupRoute)
-// Authentication route
+// Authentication routes
 app.use('/api/auth', authRoutes)
-// GraphqQL server route
+// GraphqQL route
 // app.use('/graphql', graphqlHTTP(req => ({
 //   schema,
 //   pretty: true,
