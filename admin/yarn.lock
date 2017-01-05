@@ -3596,7 +3596,7 @@ mobx-react-form@^1.17.5:
   dependencies:
     lodash "^4.16.2"
 
-mobx-react-router@^3.0.0:
+mobx-react-router@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/mobx-react-router/-/mobx-react-router-3.1.0.tgz#1f188abe149fdd363a742d91f5a6edf6bb6056a9"
 
@@ -3606,9 +3606,9 @@ mobx-react@^4.0.4:
   dependencies:
     hoist-non-react-statics "^1.2.0"
 
-mobx-utils@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/mobx-utils/-/mobx-utils-1.1.4.tgz#e15b9a0d517a11a0d07c7ea878cb1ea84feede9e"
+mobx-utils@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/mobx-utils/-/mobx-utils-1.1.5.tgz#f6942b566cea629f0bf17876baf1a45cba695190"
 
 mobx@^2.7.0:
   version "2.7.0"
@@ -5524,7 +5524,11 @@ whatwg-encoding@^1.0.1:
   dependencies:
     iconv-lite "0.4.13"
 
-whatwg-fetch@1.0.0, whatwg-fetch@>=0.10.0:
+whatwg-fetch@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-2.0.1.tgz#078b9461bbe91cea73cbce8bb122a05f9e92b772"
+
+whatwg-fetch@>=0.10.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-1.0.0.tgz#01c2ac4df40e236aaa18480e3be74bd5c8eb798e"
 

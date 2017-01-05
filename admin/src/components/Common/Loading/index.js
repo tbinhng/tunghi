@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import './Loading.scss'
 
-export default class LoadingSpinner extends Component {
+export default class Loading extends Component {
   render() {
     return (
       <div className="showbox">

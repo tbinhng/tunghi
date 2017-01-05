@@ -1,27 +1,28 @@
-import React, {Component} from 'react'
-import {Link, browserHistory} from 'react-router';
-import {Icon} from 'react-fa';
+import React, { Component } from 'react'
+import { observer, inject } from 'mobx-react'
+import { Link } from 'react-router'
+import { Icon } from 'react-fa'
 import {PageHeader} from 'react-bootstrap';
-import './index.scss';
+import './index.scss'
+import Loading from './../Common/Loading'
 
-class Admin extends Component {
-
+@inject('auth')
+@observer class Admin extends Component {
   constructor(props) {
-    super(props);
-    this.state = {
-      pageName: props.location.pathname.substring(1)
-    }
+    super(props)
+
+    this.auth = props.auth
   }
 
-  componentWillMount() {
-    browserHistory.listen(location => {
-      this.setState({
-        pageName: location.pathname.substring(1)
-      });
-    });
+  componentDidMount() {
+    this.auth.me()
   }
 
   render() {
+    if (!this.auth.isAuthenticated) {
+      return <Loading />
+    }
+
     return (
       <div className="menu">
         <div className="top-page">
@@ -88,7 +89,7 @@ class Admin extends Component {
           {this.props.children}
         </div>
       </div>
-    );
+    )
   }
 }
 

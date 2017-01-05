@@ -51,9 +51,7 @@ class Product extends Component {
           <tbody>
             <tr>
               <td>1</td>
-              <td className="product-img">
-                <Link to={``}><img alt="product-img" src={productImg}/></Link>
-              </td>
+              <td className="product-img"><Link to={``}><img role="presentation" src={productImg} /></Link></td>
               <td>Otto</td>
               <td>@mdo</td>
               <td>2,000,000</td>
@@ -65,9 +63,7 @@ class Product extends Component {
             </tr>
             <tr>
               <td>2</td>
-              <td className="product-img">
-                <Link to={``}><img alt="product-img" src={productImg}/></Link>
-              </td>
+              <td className="product-img"><Link to={``}><img role="presentation" src={productImg} /></Link></td>
               <td>Thornton</td>
               <td>@fat</td>
               <td>2,000,000</td>
@@ -79,9 +75,7 @@ class Product extends Component {
             </tr>
             <tr>
               <td>3</td>
-              <td className="product-img">
-                <Link to={``}><img alt="product-img" src={productImg}/></Link>
-              </td>
+              <td className="product-img"><Link to={``}><img role="presentation" src={productImg} /></Link></td>
               <td>Larry the Bird</td>
               <td>@twitter</td>
               <td>2,000,000</td>

@@ -1,18 +1,19 @@
-import './index.scss';
-import React, { Component, PropTypes } from 'react';
-import { observer, inject } from 'mobx-react';
-import { 
-  Modal, 
-  Button, 
-  Col, 
-  FormGroup, 
-  FormControl, 
+import './index.scss'
+import React, { Component, PropTypes } from 'react'
+import { observer, inject } from 'mobx-react'
+import {
+  Modal,
+  Button,
+  Col,
+  FormGroup,
+  FormControl,
   Form,
   HelpBlock
-} from 'react-bootstrap';
-import BaseForm from './../Common/BaseForm';
-import {Icon} from 'react-fa';
-import {Link} from 'react-router';
+} from 'react-bootstrap'
+import { Icon } from 'react-fa'
+import { Link } from 'react-router'
+import BaseForm from './../Common/BaseForm'
+import Loading from './../Common/Loading'
 
 @inject('auth')
 @observer class Login extends Component {
@@ -38,21 +39,20 @@ import {Link} from 'react-router';
         rules: 'required|string|between:5,25',
       }
     })
+    this.auth = props.auth
   }
 
   onSuccess(form) {
-    const { auth } = this.props;
-    auth.login(form.values()).then(() => {
-      // this.state.error = null
-      // this.state.isLoading = false
-      this.context.router.push('/')
-    }).catch(error => {
-      // this.state.error = error
-      // this.state.isLoading = false
+    this.auth.login(form.values()).then(() => {
+      this.context.router.replace('/admin')
     })
   }
 
   render() {
+    if (this.auth.loading) {
+      return <Loading />
+    }
+
     return (
       <div className="static-modal">
         <Modal.Dialog>
@@ -83,12 +83,12 @@ import {Link} from 'react-router';
 
               <FormGroup controlId="password" validationState={this.form.$('password').hasError ? 'error' : 'success'}>
                 <Col md={12}>
-                  <FormControl 
+                  <FormControl
                     name={this.form.$('password').name}
                     value={this.form.$('password').value}
-                    className="login-input" 
-                    type="password" 
-                    placeholder={this.form.$('password').label} 
+                    className="login-input"
+                    type="password"
+                    placeholder={this.form.$('password').label}
                     onChange={this.form.$('password').sync} />
                   <FormControl.Feedback />
                   <HelpBlock>{this.form.$('password').error || ''}</HelpBlock>
@@ -97,8 +97,9 @@ import {Link} from 'react-router';
 
               <FormGroup>
                 <Col smOffset={2} sm={10}>
-                  <Button 
-                    bsStyle="primary" 
+                  <Button
+                    type='submit'
+                    bsStyle="primary"
                     disabled={!(this.form.$('id').isDirty && this.form.$('password').isDirty && this.form.$('id').isValid && this.form.$('password').isValid)}
                     onClick={this.submit}>
                     Login

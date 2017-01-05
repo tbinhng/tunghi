@@ -27,7 +27,7 @@ class AuthService extends Singleton {
       }
       let options = getHeaders(token)
 
-      return request(WS_AUTHED_USER_URL, options).then(json => json.user)
+      return request(WS_AUTHED_USER_URL, options).then(json => json.data)
     } catch (error) {
       handleException(error)
     }
@@ -43,8 +43,8 @@ class AuthService extends Singleton {
       throw new Error(json.error)
     }
 
-    Store.set(ACCESS_TOKEN_PATH, json.token)
-    return json.token
+    Store.set(ACCESS_TOKEN_PATH, json.data)
+    return json.data
   }
 
 }

@@ -8,9 +8,11 @@ import { checkAuthorized } from './../actions/auth'
  * @param next
  */
 export default (req, res, next) => {
-  checkAuthorized(req.token).then(auth => {
+  const token = req.body.token || req.query.token || req.headers['x-access-token'];
+  checkAuthorized(token).then(auth => {
     logger('server:authorized')(auth._id)
     req.authorized = true
+    req.token = auth.token
     next()
   }).catch(error => {
     logger('server:error')(error)
