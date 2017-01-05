@@ -11,8 +11,6 @@ export class Auth extends Singleton {
   @observable error = null
   @observable loading = false
 
-  service = null
-
   constructor() {
     super()
 
@@ -63,7 +61,6 @@ export class Auth extends Singleton {
     }
   }
 
-  @action
   handleSuccessRequest() {
     runInAction('handleSuccessRequest', () => {
       this.error = null
@@ -71,7 +68,6 @@ export class Auth extends Singleton {
     })
   }
 
-  @action
   handleFailureRequest(error) {
     runInAction('handleFailureRequest', () => {
       this.error = error

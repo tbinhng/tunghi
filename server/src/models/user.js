@@ -8,6 +8,13 @@ const nameSchema = new Schema({
   last: { type: String, required: true }
 })
 
+const fbSchema = new Schema({
+  id: { type: String, required: true, index: true },
+  name: { type: String, required: true },
+  email: { type: String, required: true },
+  token: { type: String },
+})
+
 const schema = new Schema({
   username: { type: String, required: true, unique: true, index: true, trim: true },
   password: { type: String, required: true, select: false },
@@ -26,15 +33,14 @@ const schema = new Schema({
   name: { type: nameSchema },
   token: { type: String },
   avatar: { type: String },
-  admin: { type: Boolean, default: false }
+  admin: { type: Boolean, default: false },
+  facebook: fbSchema
 },
   { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } }
 )
 
-schema.methods.hashPassword = function() {
+schema.methods.hashPassword = function () {
   this.password = sha512(this.password)
-
-  return this.password
 }
 
 // Before save

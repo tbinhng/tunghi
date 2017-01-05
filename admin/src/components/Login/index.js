@@ -10,10 +10,9 @@ import {
   Form,
   HelpBlock
 } from 'react-bootstrap'
-import { Icon } from 'react-fa'
-import { Link } from 'react-router'
 import BaseForm from './../Common/BaseForm'
 import Loading from './../Common/Loading'
+import Facebook from './../Common/Facebook'
 
 @inject('auth')
 @observer class Login extends Component {
@@ -48,6 +47,14 @@ import Loading from './../Common/Loading'
     })
   }
 
+  responseFacebook = (response) => {
+    console.log(response);
+  }
+
+  componentClicked = (response) => {
+    console.log(response);
+  }
+
   render() {
     if (this.auth.loading) {
       return <Loading />
@@ -58,10 +65,12 @@ import Loading from './../Common/Loading'
         <Modal.Dialog>
           <Modal.Body>
             <h1>Login Tunghi Admin</h1>
-            <Link to={``} className="fb-login">
-              <Icon name="facebook-official" size="2x" />
-              <span>Login with FB account</span>
-            </Link>
+            <Facebook
+              appId="1426953154015836"
+              autoLoad={true}
+              fields="name,email,picture"
+              onClick={this.componentClicked}
+              callback={this.responseFacebook} />
             <Form
               horizontal
               autoComplete="off"
