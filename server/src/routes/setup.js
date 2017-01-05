@@ -1,7 +1,6 @@
 import { Router } from 'express'
 import { register } from './../actions/auth'
 import User from './../models/user'
-import { sha512 } from './../utils'
 const router = Router()
 
 router.get('/', (req, res) => res.json('Hello World'))
@@ -9,7 +8,7 @@ router.get('/', (req, res) => res.json('Hello World'))
 router.get('/setup', async (req, res) => {
   const credentials = {
     username: 'tunghi',
-    password: sha512('P@ssword'),
+    password: 'P@ssword',
     email: 'admin@gmail.com',
     name: {
       first: 'Binh',

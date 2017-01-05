@@ -37,4 +37,10 @@ schema.methods.hashPassword = function() {
   return this.password
 }
 
+// Before save
+schema.pre('save', (next) => {
+  // Do stuff here
+  next()
+})
+
 export default database.model('User', schema)
