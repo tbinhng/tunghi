@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Link, browserHistory} from 'react-router';
 import {Icon} from 'react-fa';
+import {PageHeader} from 'react-bootstrap';
 import './index.scss';
 
 class Admin extends Component {
@@ -24,14 +25,14 @@ class Admin extends Component {
     return (
       <div className="menu">
         <div className="top-page">
-          <Link to={`/client`} className="logo"><span className="color-green">TUNG HÍ</span> admin</Link>
+          <Link to={`/client`} className="logo hover-green"><span className="color-green">TUNG HÍ</span> admin</Link>
           <div className="right-item">
-            <Link to={`#`} className="left-item info-msg">
+            <Link to={`#`} className="left-item info-msg hover-green">
               <Icon name="bell-o"/>
               <span className="quantity">5</span>
               <ul></ul>
             </Link>
-            <Link to={`/`} className="left-item">
+            <Link to={`/`} className="left-item hover-green">
               <Icon name="sign-out" size="2x"/>
             </Link>
           </div>
@@ -57,19 +58,19 @@ class Admin extends Component {
               </Link>
             </li>
             <li>
-              <Link to={`/setting`} activeClassName="active">
+              <Link to={`/email`} activeClassName="active">
                 <Icon name="envelope" />
                 <span>Hộp thư</span>
               </Link>
             </li>
             <li>
-              <Link to={`/setting`} activeClassName="active">
+              <Link to={`/comment`} activeClassName="active">
                 <Icon name="comments" />
                 <span>Bình luận</span>
               </Link>
             </li>
             <li>
-              <Link to={`/setting`} activeClassName="active">
+              <Link to={`/invoice`} activeClassName="active">
                 <Icon name="shopping-bag" />
                 <span>Hóa đơn</span>
               </Link>
@@ -83,7 +84,7 @@ class Admin extends Component {
           </ul>
         </aside>
         <div className="main-content">
-          <h1>{this.state.pageName}</h1>
+          <PageHeader>{this.state.pageName}</PageHeader>
           {this.props.children}
         </div>
       </div>
