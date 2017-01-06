@@ -2,6 +2,32 @@ import React, {Component, PropTypes} from 'react';
 import CustomTable from '../Common/Table';
 import './index.scss';
 
+const headers = ['#', 'Hình ảnh', 'Tên sản phẩm', 'Phân loại','Giá tiền','Số lượng'];
+const data = [{
+  id: 1,
+  img: 'http://i.imgur.com/u5OUfBF.jpg',
+  name: 'giỏ xách',
+  category: 'gucci',
+  price: 2000000,
+  quantity: 20
+},
+{
+  id: 2,
+  img: 'http://i.imgur.com/u5OUfBF.jpg',
+  name: 'túi xách',
+  category: 'việt nam',
+  price: 200000,
+  quantity: 2
+},
+{
+  id: 3,
+  img: 'http://i.imgur.com/u5OUfBF.jpg',
+  name: 'túi vải',
+  category: 'thái lan',
+  price: 500000,
+  quantity: 20
+}];
+
 class Product extends Component {
 
   static contextTypes = {
@@ -27,7 +53,7 @@ class Product extends Component {
 
   render() {
     return (
-      <CustomTable onSuccess={this.onSuccess} handleSelect={this.handleSelect} />
+      <CustomTable headers={headers} data={data} onSuccess={this.onSuccess} handleSelect={this.handleSelect} />
     );
   }
 }

@@ -1,8 +1,8 @@
 import React, {Component, PropTypes} from 'react';
-import { observer } from 'mobx-react'
+import {observer} from 'mobx-react'
 import {
-  Table, 
-  Button, 
+  Table,
+  Button,
   Pagination,
   Form,
   FormGroup,
@@ -12,7 +12,6 @@ import {
 import {Link} from 'react-router';
 import {Icon} from 'react-fa';
 import BaseForm from '../BaseForm';
-import productImg from '../../../assets/products/product-img.jpg';
 import './index.scss';
 
 @observer class CustomTable extends Component {
@@ -34,21 +33,34 @@ import './index.scss';
       }
     });
 
-    if(props.onSuccess){
-        this.onSuccess = function(form) {
-            props.onSuccess(form);
-        };
+    if (props.onSuccess) {
+      this.onSuccess = function (form) {
+        props.onSuccess(form);
+      };
     }
-    if(props.handleSelect){
-        this.handleSelect = function(event){
-            this.setState({activePage: event});
-            props.handleSelect();
-        };
+    if (props.handleSelect) {
+      this.handleSelect = function (event) {
+        this.setState({activePage: event});
+        props.handleSelect();
+      };
     }
-    this.onSuccess = this.onSuccess.bind(this);
+    if (props.addItem) {
+      this.addItem = props.addItem;
+    }
+    
+    this.onSuccess = this
+      .onSuccess
+      .bind(this);
     this.handleSelect = this
       .handleSelect
       .bind(this);
+    this.addItem = this
+      .addItem
+      .bind(this);
+  }
+
+  addItem(event) {
+    console.log(event);
   }
 
   onSuccess(form) {
@@ -60,10 +72,14 @@ import './index.scss';
   }
 
   render() {
+
     return (
       <div className="table-list">
         <div className="table-utils">
-          <Button bsStyle="primary" className="add-btn left-item hover-scale">Thêm sản phẩm</Button>
+          <Button
+            onClick={this.addItem}
+            bsStyle="primary"
+            className="add-btn left-item hover-scale">Thêm sản phẩm</Button>
           <Pagination
             className="right-item"
             first
@@ -73,20 +89,31 @@ import './index.scss';
             activePage={this.state.activePage}
             onSelect={this.handleSelect}/>
           <Form
-          className="left-item"
-          autoComplete="off"
-          onSubmit={e => this
-          .form
-          .onSubmit(e, {onSuccess: this.onSuccess})}>
-            <FormGroup 
-            controlId="search">
+            className="left-item"
+            autoComplete="off"
+            onSubmit={e => this
+            .form
+            .onSubmit(e, {onSuccess: this.onSuccess})}>
+            <FormGroup controlId="search">
               <Col md={12}>
                 <FormControl
-                  name={this.form.$('search').name}
-                  value={this.form.$('search').value}
+                  name={this
+                  .form
+                  .$('search')
+                  .name}
+                  value={this
+                  .form
+                  .$('search')
+                  .value}
                   type="text"
-                  placeholder={this.form.$('search').label}
-                  onChange={this.form.$('search').sync} />
+                  placeholder={this
+                  .form
+                  .$('search')
+                  .label}
+                  onChange={this
+                  .form
+                  .$('search')
+                  .sync}/>
               </Col>
             </FormGroup>
             <FormGroup>
@@ -96,7 +123,7 @@ import './index.scss';
                   bsStyle="primary"
                   className="search-btn"
                   onClick={this.submit}>
-                  <Icon name="search" />
+                  <Icon name="search"/>
                 </Button>
               </Col>
             </FormGroup>
@@ -106,58 +133,41 @@ import './index.scss';
         <Table bordered condensed hover>
           <thead>
             <tr>
-              <th>#</th>
-              <th>Hình ảnh</th>
-              <th>Tên sản phẩm</th>
-              <th>Phân loại</th>
-              <th>Giá tiền</th>
-              <th>Số lượng</th>
+              {this
+                .props
+                .headers
+                .map((header, index) => {
+                  return <th key={index}>{header}</th>
+                })}
               <th></th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td className="product-img">
-                <Link to={``}><img role="presentation" src={productImg}/></Link>
-              </td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>2,000,000</td>
-              <td>20</td>
-              <td className="action">
-                <Button bsStyle="warning" className="edit-btn hover-scale">Edit</Button>
-                <Button bsStyle="danger" className="hover-scale">Delete</Button>
-              </td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td className="product-img">
-                <Link to={``}><img role="presentation" src={productImg}/></Link>
-              </td>
-              <td>Thornton</td>
-              <td>@fat</td>
-              <td>2,000,000</td>
-              <td>20</td>
-              <td className="action">
-                <Button bsStyle="warning" className="edit-btn hover-scale">Edit</Button>
-                <Button bsStyle="danger" className="hover-scale">Delete</Button>
-              </td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td className="product-img">
-                <Link to={``}><img role="presentation" src={productImg}/></Link>
-              </td>
-              <td>Larry the Bird</td>
-              <td>@twitter</td>
-              <td>2,000,000</td>
-              <td>20</td>
-              <td className="action">
-                <Button bsStyle="warning" className="edit-btn hover-scale">Edit</Button>
-                <Button bsStyle="danger" className="hover-scale">Delete</Button>
-              </td>
-            </tr>
+            {this
+              .props
+              .data
+              .map((row, index) => {
+                return (
+                  <tr key={index}>
+                    {Object
+                      .keys(row)
+                      .map((key, j) => {
+                        if (key === 'img') {
+                          return (
+                            <td className="product-img" key={j}>
+                              <Link to={``}><img role="presentation" src={row[key]}/></Link>
+                            </td>
+                          );
+                        }
+                        return <td key={j}>{row[key]}</td>;
+                      })}
+                    <td className="action">
+                      <Button bsStyle="warning" className="edit-btn hover-scale">Edit</Button>
+                      <Button bsStyle="danger" className="hover-scale">Delete</Button>
+                    </td>
+                  </tr>
+                );
+              })}
           </tbody>
         </Table>
       </div>
