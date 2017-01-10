@@ -1,12 +1,14 @@
-.fb-login {
+.fb-login-block {
   display: block;
   margin: 0 auto 30px;
+  padding-bottom: 10px;
   border-bottom: 1px solid rgba(255, 255, 255, .5);
   .btn.btn-default {
     color: #ffffff;
     background: transparent;
     border: none;
     span {
+      vertical-align: middle;
       &.fa-facebook-official {
         margin-right: 10px;
       }

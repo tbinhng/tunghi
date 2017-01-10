@@ -47,7 +47,7 @@ import './index.scss';
     if (props.addItem) {
       this.addItem = props.addItem;
     }
-    
+
     this.onSuccess = this
       .onSuccess
       .bind(this);

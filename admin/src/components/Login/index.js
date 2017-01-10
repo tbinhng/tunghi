@@ -48,7 +48,9 @@ import Facebook from './../Common/Facebook'
   }
 
   responseFacebook = (response) => {
-    console.log(response);
+    if(response.userID) {
+      this.context.router.replace('/admin');
+    }
   }
 
   componentClicked = (response) => {
@@ -65,11 +67,11 @@ import Facebook from './../Common/Facebook'
         <Modal.Dialog>
           <Modal.Body>
             <h1>Login Tunghi Admin</h1>
-            <div className="fb-login">
+            <div className="fb-login-block">
               <Facebook
                 appId="1426953154015836"
                 autoLoad={true}
-                fields="name,email,picture"
+                fields="name,email,manage_pages,publish_pages,pages_messaging_subscriptions,pages_show_list,read_page_mailboxes"
                 onClick={this.componentClicked}
                 callback={this.responseFacebook} />
             </div>
